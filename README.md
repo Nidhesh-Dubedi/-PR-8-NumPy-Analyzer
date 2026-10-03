@@ -38,6 +38,7 @@ It’s designed for students, developers, and data science enthusiasts who want 
   - Display the shape of all arrays created so far
 
 ---
+### Author : Nidhesh Dubedi
 
 ---
 
@@ -60,7 +61,7 @@ python Numpy_analyzer.py
 
 👉 This README is professional, concise, and ready to ship. It explains **what the project is, how to run it, and how to use every feature**.  
 
-### Author : Nidhesh Dubedi
+
 
 
 
