@@ -417,7 +417,15 @@ def menu():
             print("Shape of 1D Array:", da.get_oneD().shape if da.get_oneD() is not None else "Not created")
             print("Shape of 2D Array:", da.get_twoD().shape if da.get_twoD() is not None else "Not created")
             print("Shape of 3D Array:", da.get_threeD().shape if da.get_threeD() is not None else "Not created")
-
+        
+        elif user == 8:
+            print("Exiting the program. bye!")
+            break
+       
+        else:
+            print("Invalid choice. Please try again.")
+    input("Press Enter to RE-ENTER in the menu...")
+    
 if __name__ == "__main__":
     menu()
 
