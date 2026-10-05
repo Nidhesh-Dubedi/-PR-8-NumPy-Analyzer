@@ -424,7 +424,7 @@ def menu():
        
         else:
             print("Invalid choice. Please try again.")
-    input("Press Enter to RE-ENTER in the menu...")
+    
     
 if __name__ == "__main__":
     menu()
