@@ -293,6 +293,7 @@ def menu():
                 2. Subtraction
                 3. Multiplication
                 4. Division
+                5. Back to Main Menu
                 """)
             choice = int(input("Enter your choice : "))
             if choice == 1:
@@ -318,6 +319,7 @@ def menu():
             print("""
                 1. Indexing
                 2. Slicing
+                3. Back to Main Menu
                 """)
             choice = int(input("Enter your choice: "))
             if choice == 1:
@@ -329,11 +331,17 @@ def menu():
                 slices = input("Enter slice indices (e.g., 'start:stop' or 'start:stop:step'): ")
                 slice_tuple = tuple(slice(*map(int, s.split(':'))) for s in slices.split(','))
                 da.slice_array(arr_choice, *slice_tuple)
+            elif choice == 3:
+                print("Back to the main menu....")
+                continue
+            else:
+                print("Invalid choice.")
 
         elif user == 4:
             print("""
                 1. Combining Arrays
                 2. Splitting Arrays
+                3. Back to Main Menu
                 """)
             choice = int(input("Enter your choice: "))
             if choice == 1:
@@ -345,12 +353,18 @@ def menu():
                 sections = int(input("Enter number of sections to split into: "))
                 axis = int(input("Enter axis to split along (default 0): ") or 0)
                 da.split_array(arr_choice, sections, axis)
+            elif choice == 3:   
+                print("Back to the main menu....")
+                continue
+            else:
+                print("Invalid choice.")
 
         elif user == 5:
             print("""
                 1. Searching
                 2. Sorting
                 3. Filtering
+                4. Back to Main Menu
                 """)
             choice = int(input("Enter your choice: "))
             if choice == 1:
@@ -371,10 +385,14 @@ def menu():
                                         """)
                 condition = eval(condition_str)
                 da.filter_array(arr_choice, condition)
+            elif choice == 4:
+                print("Back to the main menu....")
+                break
             else:
                 print("Invalid choice.")   
 
         elif user == 6:
+            while True:  # loop for the stats sub-menu
                 print("""
                     1. Sum
                     2. Mean
@@ -384,15 +402,18 @@ def menu():
                     6. Percentile
                     7. Minimum
                     8. Maximum
+                    9. Back to Main Menu
                 """)
                 choice = int(input("Enter your choice: "))
+
+                if choice == 9:
+                    print("Back to the main menu....")
+                    break  # exit the stats sub-menu loop
+
                 arr_choice = int(input("Choose array (1D=1, 2D=2, 3D=3): "))
                 axis = input("Enter axis (or leave blank for default): ")
-
-                # Convert axis input to None if left blank
                 axis = None if axis.strip() == "" else int(axis)
 
-                # Map menu choice to operation string
                 operations = {
                     1: "sum",
                     2: "mean",
@@ -405,27 +426,28 @@ def menu():
                 }
 
                 if choice in operations:
-                  if choice == 6:  # Percentile
-                   percentile_value = int(input("Enter percentile value or its by default 50 (e.g., 25, 50, 75): "))
-                   da.stats_array(arr_choice, operations[choice], axis=axis, percentile_value=percentile_value)
-                  else:
-                     da.stats_array(arr_choice, operations[choice], axis=axis)
+                    if choice == 6:  # Percentile
+                        percentile_input = input("Enter percentile value (default=50): ")
+                        percentile_value = 50 if percentile_input.strip() == "" else int(percentile_input)
+                        da.stats_array(arr_choice, operations[choice], axis=axis, percentile_value=percentile_value)
+                    else:
+                        da.stats_array(arr_choice, operations[choice], axis=axis)
                 else:
-                         print("Invalid choice.")
+                    print("Invalid choice.")
+
+
 
         elif user == 7:
             print("Shape of 1D Array:", da.get_oneD().shape if da.get_oneD() is not None else "Not created")
             print("Shape of 2D Array:", da.get_twoD().shape if da.get_twoD() is not None else "Not created")
             print("Shape of 3D Array:", da.get_threeD().shape if da.get_threeD() is not None else "Not created")
-        
         elif user == 8:
             print("Exiting the program. bye!")
             break
-       
         else:
             print("Invalid choice. Please try again.")
-    
-    
+    input("Press Enter to RE-ENTER in the menu...")
+
 if __name__ == "__main__":
     menu()
 
